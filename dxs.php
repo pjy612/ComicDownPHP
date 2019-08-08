@@ -78,12 +78,14 @@ function gbk($str)
 	#return $str;
 	return iconv('UTF-8', 'GBK//IGNORE', $str);
 }
-if(isset($_REQUEST['cname']) && isset($_REQUEST['no']) && isset($_REQUEST['bname']) && isset($_REQUEST['content']))
+if(isset($_REQUEST['cname']) && isset($_REQUEST['gname']) && isset($_REQUEST['no']) && isset($_REQUEST['bname']) && isset($_REQUEST['content']))
 {
     $no=$_REQUEST['no'];
     $bname=ckf(SBC_DBC($_REQUEST['bname']));
-    $cname=$_REQUEST['cname'];    
-    $filename=ckf(SBC_DBC($cname,0));
+    $cname=$_REQUEST['cname'];
+    $gname=$_REQUEST['gname'];
+    $fname=strlen($gname)>0?$gname.$cname:$cname;
+    $filename=ckf(SBC_DBC($fname,0));
     $content=$_REQUEST['content'];
     if(!is_dir(gbk($bname)))mkdir(gbk($bname));
     
